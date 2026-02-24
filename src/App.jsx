@@ -3,13 +3,21 @@ import Item from "./components/Item";
 
 function App() {
   const [contador, setContador] = useState(0);
-  const [items, setItems] = useState(["A", "B", "C"]);
+  const [items, setItems] = useState([
+    { id: crypto.randomUUID(), nombre: "A" },
+    { id: crypto.randomUUID(), nombre: "B" },
+    { id: crypto.randomUUID(), nombre: "C" },
+  ]);
   //const [nuevoNombre, setNuevoNombre] = useState("");
 
   console.log("Render App");
 
   function agregarItem() {
-    setItems([...items, "Nuevo"]);
+    const nuevoItem = {
+      id: crypto.randomUUID(),
+      nombre: "Nuevo"
+    };
+    setItems(prev => [...prev, nuevoItem]);
     
     /*
     if (!nuevoNombre.trim()) return;
@@ -39,9 +47,9 @@ function App() {
       </button>
 
       <ul>
-        {items.map((item, index) => (
-          <Item key={item} nombre={item} />
-        ))}
+        {items.map((item => (
+          <Item key={item.id} nombre={item.nombre} />
+        )))}
       </ul>
     </div>
   );
